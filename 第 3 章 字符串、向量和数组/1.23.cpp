@@ -1,5 +1,9 @@
 #include <iostream>
 #include <string>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
 
 struct Sales_data {
   std::string bookNo;
@@ -11,21 +15,20 @@ struct Sales_data {
 
 int main(int argc, char const *argv[]) {
   Sales_data currData, data;
-  if (std::cin >> currData.bookNo >> currData.units_sold >> data.price) {
+  if (cin >> currData.bookNo >> currData.units_sold >> data.price) {
     int cnt = 1;
-    while (std::cin >> data.bookNo >> data.units_sold >> data.price) {
+    while (cin >> data.bookNo >> data.units_sold >> data.price) {
       if (data.bookNo == currData.bookNo) {
         cnt++;
       } else {
-        std::cout << "bookNo: " << currData.bookNo << ", Num: " << cnt
-                  << std::endl;
+        cout << "ISBN: " << currData.bookNo << ", Num: " << cnt << endl;
         currData.bookNo = data.bookNo;
         currData.units_sold = data.units_sold;
         currData.price = data.price;
         cnt = 1;
       }
     }
-    std::cout << "bookNo: " << currData.bookNo << ", Num: " << cnt << std::endl;
+    cout << "ISBN: " << currData.bookNo << ", Num: " << cnt << endl;
   }
   return 0;
 }

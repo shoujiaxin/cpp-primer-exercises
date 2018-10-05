@@ -1,5 +1,9 @@
 #include <iostream>
 #include <string>
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
 
 struct Sales_data {
   std::string bookNo;
@@ -11,8 +15,8 @@ struct Sales_data {
 
 int main(int argc, char const *argv[]) {
   Sales_data data1, data2;
-  std::cin >> data1.bookNo >> data1.units_sold >> data1.price;
-  std::cin >> data2.bookNo >> data2.units_sold >> data2.price;
+  cin >> data1.bookNo >> data1.units_sold >> data1.price;
+  cin >> data2.bookNo >> data2.units_sold >> data2.price;
   data1.revenue = data1.units_sold * data1.price;
   data2.revenue = data2.units_sold * data2.price;
 
@@ -20,8 +24,8 @@ int main(int argc, char const *argv[]) {
     unsigned int totalNum = data1.units_sold + data2.units_sold;
     double totalRevenue = data1.revenue + data2.revenue;
     double ave = totalRevenue / totalNum;
-    std::cout << data1.bookNo << " " << totalNum << " "
-              << data1.revenue + data2.revenue << " " << ave << std::endl;
+    cout << data1.bookNo << " " << totalNum << " "
+         << data1.revenue + data2.revenue << " " << ave << endl;
   }
   return 0;
 }
