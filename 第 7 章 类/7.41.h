@@ -10,11 +10,18 @@ struct Sales_data {
   friend std::ostream &print(std::ostream &, const Sales_data &);
 
  public:
-  Sales_data() = default;
   Sales_data(const std::string &s, unsigned n, double p)
-      : bookNo(s), units_sold(n), revenue(p * n) {}
-  Sales_data(const std::string &s) : bookNo(s) {}
-  Sales_data(std::istream &);
+      : bookNo(s), units_sold(n), revenue(n * p) {
+    std::cout << "Sales_data(const std::string&, unsigned, double)"
+              << std::endl;
+  }
+  Sales_data() : Sales_data("", 0, 0.0f) {
+    std::cout << "Sales_data()" << std::endl;
+  }
+  Sales_data(const std::string &s) : Sales_data(s, 0, 0.0f) {
+    std::cout << "Sales_data(const std::string&)" << std::endl;
+  }
+  Sales_data(std::istream &is);
   std::string isbn() const { return bookNo; }
   Sales_data &combine(const Sales_data &rhs) {
     units_sold += rhs.units_sold;
@@ -28,8 +35,12 @@ struct Sales_data {
   unsigned int units_sold = 0;
   double price = 0.0;    // 单价
   double revenue = 0.0;  // 总收入
-  double avg_price() const { return units_sold ? revenue / units_sold : 0; }
+  double avg_price() const;
 };
+
+inline double Sales_data::avg_price() const {
+  return units_sold ? revenue / units_sold : 0;
+}
 
 Sales_data add(const Sales_data &data1, const Sales_data &data2) {
   Sales_data sum = data1;

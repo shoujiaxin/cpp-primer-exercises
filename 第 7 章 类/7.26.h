@@ -28,8 +28,12 @@ struct Sales_data {
   unsigned int units_sold = 0;
   double price = 0.0;    // 单价
   double revenue = 0.0;  // 总收入
-  double avg_price() const { return units_sold ? revenue / units_sold : 0; }
+  double avg_price() const;
 };
+
+inline double Sales_data::avg_price() const {
+  return units_sold ? revenue / units_sold : 0;
+}
 
 Sales_data add(const Sales_data &data1, const Sales_data &data2) {
   Sales_data sum = data1;
