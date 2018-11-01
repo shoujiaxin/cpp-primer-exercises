@@ -1,7 +1,12 @@
-#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
+
+using namespace std::placeholders;
+
+bool check_size(const int val, const std::string &str) {
+  return val > str.size();
+}
 
 void elimDups(std::vector<std::string> &svec) {
   sort(svec.begin(), svec.end());
@@ -14,11 +19,9 @@ void biggies(std::vector<std::string> &words,
   elimDups(words);
   stable_sort(words.begin(), words.end(),
               [](const std::string &a, const std::string &b) {
-                return a.size() < b.size();
-              });
-  auto ep =
-      stable_partition(words.begin(), words.end(),
-                       [sz](const std::string &a) { return a.size() >= sz; });
+                return a.size() > b.size();
+              });  // descending
+  auto ep = find_if(words.begin(), words.end(), bind(check_size, sz, _1));
   auto count = ep - words.begin();
   std::cout << count << " " << (count > 2 ? "words" : "word") << " of length "
             << sz << " or longer" << std::endl;
