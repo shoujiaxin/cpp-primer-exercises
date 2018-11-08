@@ -1,3 +1,6 @@
+#ifndef STRBLOB_H
+#define STRBLOB_H
+
 #include <initializer_list>
 #include <memory>
 #include <stdexcept>
@@ -58,3 +61,5 @@ const std::string &StrBlob::back() const {
   check(0, "back on empty StrBlob");
   return data->back();
 }
+
+#endif

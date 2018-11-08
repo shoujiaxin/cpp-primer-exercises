@@ -1,3 +1,6 @@
+#ifndef STRBLOB_H
+#define STRBLOB_H
+
 #include <initializer_list>
 #include <memory>
 #include <stdexcept>
@@ -105,3 +108,5 @@ StrBlobPtr &StrBlobPtr::incr() {
   ++curr;
   return *this;
 }
+
+#endif
