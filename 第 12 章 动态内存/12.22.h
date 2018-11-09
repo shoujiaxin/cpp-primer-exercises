@@ -38,8 +38,8 @@ class StrBlob {
 
 class StrBlobPtr {
  public:
-  StrBlobPtr() : curr(0){};
-  StrBlobPtr(StrBlob &a, size_t sz = 0) : wptr(a.data), curr(sz){};
+  StrBlobPtr() : curr(0) {}
+  StrBlobPtr(StrBlob &a, size_t sz = 0) : wptr(a.data), curr(sz) {}
   std::string &deref() const;
   StrBlobPtr &incr();
 
@@ -52,8 +52,8 @@ class StrBlobPtr {
 
 class ConstStrBlobPtr {
  public:
-  ConstStrBlobPtr() : curr(0){};
-  ConstStrBlobPtr(const StrBlob &a, size_t sz = 0) : wptr(a.data), curr(sz){};
+  ConstStrBlobPtr() : curr(0) {}
+  ConstStrBlobPtr(const StrBlob &a, size_t sz = 0) : wptr(a.data), curr(sz) {}
   std::string &deref() const;
   ConstStrBlobPtr &incr();
 

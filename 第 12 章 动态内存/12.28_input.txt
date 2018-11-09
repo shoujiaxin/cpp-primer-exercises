@@ -1,0 +1,19 @@
+Before looking at the new namespace facilities in C++
+Let’s review the namespace properties that already exist in C++ and introduce some terminology.
+This can help make the idea of namespaces seem more familiar.
+One term you need to be aware of is declarative region.
+A declarative region is a region in which declarations can be made.
+For example, you can declare a global variable outside any function.
+The declarative region for that variable is the file in which it is declared.
+If you declare a variable inside a function, its declarative region is the innermost block in which it is declared.
+A second term you need to be aware of is potential scope.
+The potential scope for a variable begins at its point of declaration and extends to the end of its declarative region.
+So the potential scope is more limited than the declarative region because you can’t use a variable above the point where it is first defined.
+However, a variable might not be visible everywhere in its potential scope.
+For instance, it might be hidden by another variable of the same name declared in a nested declarative region.
+For example, a local variable declared in a function (for this variable, the declarative region is the function) hides a global variable declared in the same file (for this variable, the declarative region is the file).
+The portion of the program that can actually see the variable is termed the scope, which is the way we’ve been using the term all along.
+Figures 9.5 and 9.6 illustrate the terms declarative region, potential scope, and scope.
+C++’s rules about global and local variables define a kind of namespace hierarchy.
+Each declarative region can declare names that are independent of names declared in other declarative regions.
+A local variable declared in one function doesn’t conflict with a local variable declared in a second function.
