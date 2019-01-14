@@ -1,5 +1,5 @@
-#ifndef SALESDATA_H
-#define SALESDATA_H
+#ifndef SALES_DATA_H
+#define SALES_DATA_H
 
 #include <iostream>
 #include <string>
@@ -7,7 +7,9 @@
 struct Sales_data {
   friend Sales_data add(const Sales_data &, const Sales_data &);
   friend std::istream &read(std::istream &, Sales_data &);
+  friend std::istream &operator>>(std::istream &, Sales_data &);
   friend std::ostream &print(std::ostream &, const Sales_data &);
+  friend std::ostream &operator<<(std::ostream &, const Sales_data &);
 
  public:
   Sales_data() = default;
@@ -21,6 +23,7 @@ struct Sales_data {
     revenue += rhs.revenue;
     return *this;
   }
+  Sales_data &operator+=(const Sales_data &);
 
  private:
   std::string bookNo;
@@ -39,10 +42,26 @@ Sales_data add(const Sales_data &data1, const Sales_data &data2) {
   return sum.combine(data2);
 }
 
+Sales_data operator+(const Sales_data &lhs, const Sales_data &rhs) {
+  Sales_data sum = lhs;
+  return sum.combine(rhs);
+}
+
 std::istream &read(std::istream &is, Sales_data &data) {
   double price = 0;
   is >> data.bookNo >> data.units_sold >> price;
   data.revenue = data.units_sold * price;
+  return is;
+}
+
+std::istream &operator>>(std::istream &is, Sales_data &data) {
+  double price = 0;
+  is >> data.bookNo >> data.units_sold >> price;
+  if (is) {
+    data.revenue = data.units_sold * price;
+  } else {
+    data = Sales_data();
+  }
   return is;
 }
 
@@ -52,6 +71,18 @@ std::ostream &print(std::ostream &os, const Sales_data &data) {
   return os;
 }
 
+std::ostream &operator<<(std::ostream &os, const Sales_data &data) {
+  os << data.isbn() << " " << data.units_sold << " " << data.revenue << " "
+     << data.avg_price();
+  return os;
+}
+
 Sales_data::Sales_data(std::istream &is) { read(is, *this); }
+
+Sales_data &Sales_data::operator+=(const Sales_data &rhs) {
+  units_sold += rhs.units_sold;
+  revenue += rhs.revenue;
+  return *this;
+}
 
 #endif

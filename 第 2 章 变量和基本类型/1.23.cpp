@@ -5,15 +5,17 @@ struct Sales_data {
   std::string bookNo;
   std::string bookName;
   unsigned int units_sold = 0;
-  double price = 0.0;    // 单价
   double revenue = 0.0;  // 总收入
 };
 
 int main(int argc, char const *argv[]) {
   Sales_data currData, data;
-  if (std::cin >> currData.bookNo >> currData.units_sold >> data.price) {
+  double price = 0;
+  if (std::cin >> currData.bookNo >> currData.units_sold >> price) {
+    currData.revenue = currData.units_sold * price;
     int cnt = 1;
-    while (std::cin >> data.bookNo >> data.units_sold >> data.price) {
+    while (std::cin >> data.bookNo >> data.units_sold >> price) {
+      data.revenue = data.units_sold * price;
       if (data.bookNo == currData.bookNo) {
         cnt++;
       } else {
@@ -21,7 +23,7 @@ int main(int argc, char const *argv[]) {
                   << std::endl;
         currData.bookNo = data.bookNo;
         currData.units_sold = data.units_sold;
-        currData.price = data.price;
+        currData.revenue = data.revenue;
         cnt = 1;
       }
     }

@@ -4,14 +4,14 @@
 
 int main(int argc, char const *argv[]) {
   Sales_data data, total;
-  while (std::cin >> data.bookNo >> data.units_sold >> data.price) {
-    data.revenue = data.units_sold * data.price;
+  double price = 0;
+  while (std::cin >> data.bookNo >> data.units_sold >> price) {
+    data.revenue = data.units_sold * price;
     total.bookNo = data.bookNo;
     total.units_sold += data.units_sold;
     total.revenue += data.revenue;
-    total.price = total.revenue / total.units_sold;
   }
   std::cout << "Total: " << total.units_sold << " " << total.revenue << " "
-            << total.price << std::endl;
+            << total.revenue / total.units_sold << std::endl;
   return 0;
 }

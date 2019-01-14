@@ -1,5 +1,5 @@
-#ifndef SALESDATA_H
-#define SALESDATA_H
+#ifndef SALES_DATA_H
+#define SALES_DATA_H
 
 #include <iostream>
 #include <string>
@@ -8,13 +8,12 @@ struct Sales_data {
   Sales_data() = default;
   Sales_data(const std::string &str) : bookNo(str) {}
   Sales_data(const std::string &str, unsigned n, double p)
-      : bookNo(str), units_sold(n), price(p), revenue(n * p) {}
+      : bookNo(str), units_sold(n), revenue(n * p) {}
   Sales_data(std::istream &is);
 
   std::string bookNo;
   std::string bookName;
   unsigned int units_sold = 0;
-  double price = 0.0;    // 单价
   double revenue = 0.0;  // 总收入
 
   Sales_data &combine(const Sales_data &rhs) {
@@ -38,8 +37,9 @@ Sales_data add(const Sales_data &data1, const Sales_data &data2) {
 }
 
 std::istream &read(std::istream &is, Sales_data &data) {
-  is >> data.bookNo >> data.units_sold >> data.price;
-  data.revenue = data.units_sold * data.price;
+  double price = 0;
+  is >> data.bookNo >> data.units_sold >> price;
+  data.revenue = data.units_sold * price;
   return is;
 }
 

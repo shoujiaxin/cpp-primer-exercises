@@ -4,10 +4,11 @@
 
 int main(int argc, char const *argv[]) {
   Sales_data data1, data2;
-  std::cin >> data1.bookNo >> data1.units_sold >> data1.price;
-  std::cin >> data2.bookNo >> data2.units_sold >> data2.price;
-  data1.revenue = data1.units_sold * data1.price;
-  data2.revenue = data2.units_sold * data2.price;
+  double price = 0;
+  std::cin >> data1.bookNo >> data1.units_sold >> price;
+  data1.revenue = data1.units_sold * price;
+  std::cin >> data2.bookNo >> data2.units_sold >> price;
+  data2.revenue = data2.units_sold * price;
 
   if (data1.bookNo == data2.bookNo) {
     unsigned int totalNum = data1.units_sold + data2.units_sold;
