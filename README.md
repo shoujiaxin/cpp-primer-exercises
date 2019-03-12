@@ -80,6 +80,12 @@
 
 6. **第 493 页，练习 14.3**：(d) `svec1[0] == "stone"`
 
+7. **第 509 页**：
+
+   ```cpp
+   sum = intNegate(intAdd(10, 20));  // 等价于 sum = -30
+   ```
+
 ## 新标准修改
 
 1. **第 267 页，7.5.6 字面值常量类**：[C++14 标准](https://zh.wikipedia.org/zh-hans/C%2B%2B14)删除了 *`constexpr` 函数成员是隐式 `const` 的*，新标准中，非静态成员函数可以为非 `const`。
